@@ -1,6 +1,6 @@
 package com.javadatabase;
 
-public class Bankaci {
+public class Bankaci implements Kisi {
     // Kullanıcı adı ve şifre özelliklerini tanımlayın
     private String kullaniciAdi;
     private String sifre;
@@ -11,21 +11,36 @@ public class Bankaci {
         this.sifre = sifre;
     }
 
+    public String getKullaniciAdi() {
+        return this.kullaniciAdi;
+    };
+
+    public String getSifre() {
+        return this.sifre;
+    };
+
+    public void setKullaniciAdi(String kullaniciAdi) {
+        this.kullaniciAdi = kullaniciAdi;
+    };
+
+    public void setSifre(String sifre) {
+        this.sifre = sifre;
+    };
+
+    // Kullanıcı adı ve şifre doğrulaması için bir metod oluşturun
+    public boolean girisYap(String sifre) {
+        if (this.sifre.equals(sifre)) {
+            return true;
+        }
+        return false;
+    }
+
     // Kullanıcı adı ve şifre doğrulaması için bir metod oluşturun
     public boolean girisYap(String kullaniciAdi, String sifre) {
         if (this.kullaniciAdi.equals(kullaniciAdi) && this.sifre.equals(sifre)) {
             return true;
         }
         return false;
-    }
-
-    // Bankacının yetkilerini kullanabileceği diğer metodları da bu sınıf içinde
-    // oluşturabilirsiniz
-    // Örneğin, müşteriye yeni banka hesabı açma metodu:
-    public void hesapAc(String musteriAdi, String musteriSoyadi, long tcKimlikNo) {
-        // Yeni hesap nesnesi oluşturun ve veritabanına ekleyin
-        Hesap yeniHesap = new Hesap(musteriAdi, musteriSoyadi, tcKimlikNo);
-
     }
 
     public void paraYatir(long hesapNo, double miktar) {

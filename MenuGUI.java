@@ -82,7 +82,7 @@ public class MenuGUI extends JFrame implements ActionListener {
                 musteri.hesapBilgileriniGoruntule();
             } else {
                 // Invalid username or password
-                System.out.println("Kullanıcı adı veya şifre yanlış!");
+                System.out.println("Kullanici adf veya şifre yanliş!");
             }
         } else if (e.getSource() == exitButton) {
             // Exit the program

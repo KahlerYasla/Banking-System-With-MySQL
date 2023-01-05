@@ -5,17 +5,17 @@ Geliştirilecek olan uygulamada 3 farklı kullanıcı profili oluşturtulmalıd�
 
 1- Banka Müdürü:
 
-* Uygulamaya yeni bankacı ekleyebilme/düzenleme/silme
-* Müşterilerin kredi başvurularını onaylama/reddetme
+* Uygulamaya yeni bankacı ekleyebilme/düzenleme/silme +
+* Müşterilerin kredi başvurularını onaylama/reddetme +
 
 2- Bankacı:
 
-* Müşteriye yeni banka hesabı açabilme
-* Müşterinin hesabına paya yatırma ve çekebilme
-* Uygulamaya yeni müşteri ekleyebilme/düzenleme/silme
+* Müşteriye yeni banka hesabı açabilme +
+* Müşterinin hesabına para yatırma ve çekebilme +
+* Uygulamaya yeni müşteri ekleyebilme/düzenleme/silme +
 
 3- Müşteri:
 
-* Kendisine ait banka hesaplarını ve bakiye bilgilerini görüntüleme
-* Hesabına para yatırma ve çekebilme
-* Kredi başvurusu yapabilme/sonuçları görüntüleme
+* Kendisine ait banka hesaplarını ve bakiye bilgilerini görüntüleme +
+* Hesabına para yatırma ve çekebilme +
+* Kredi başvurusu yapabilme/sonuçları görüntüleme +

@@ -12,6 +12,6 @@ public interface Kisi {
     public void setSifre(String sifre);
 
     // Kullanıcı adı ve şifre doğrulaması için bir metod oluşturun
-    public boolean girisYap(String kullaniciAdi, String sifre);
+    public boolean girisYap(String sifre);
 
 }

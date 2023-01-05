@@ -1,9 +1,10 @@
 package com.javadatabase;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Bankaci implements Kisi {
-    // Kullanıcı adı ve şifre özelliklerini tanımlayın
+    // Kullanici adi ve şifre özelliklerini tanimlayin
     public String kullaniciAdi;
     public String sifre;
     public String bankaciId;
@@ -11,7 +12,7 @@ public class Bankaci implements Kisi {
     public BankaMuduru correspondingBankaMuduru;
     public ArrayList<Musteri> musteriler = new ArrayList<Musteri>();
 
-    // Bu sınıfın nesnelerinin oluşturulması için bir yapıcı metod oluşturun
+    // Bu sinifin nesnelerinin oluşturulmasi için bir yapici metod oluşturun
     public Bankaci(String kullaniciAdi, String sifre, String bankaciId, String correspondingBankaMuduruId,
             BankaMuduru correspondingBankaMuduru, ArrayList<Musteri> musteriler, boolean create) {
         this.kullaniciAdi = kullaniciAdi;
@@ -46,7 +47,6 @@ public class Bankaci implements Kisi {
         return this.correspondingBankaMuduru;
     };
 
-    // Kullanıcı adı ve şifre doğrulaması için bir metod oluşturun
     public boolean girisYap(String sifre) {
         if (this.sifre.equals(sifre)) {
             return true;
@@ -54,12 +54,81 @@ public class Bankaci implements Kisi {
         return false;
     }
 
-    // Kullanıcı adı ve şifre doğrulaması için bir metod oluşturun
-    public boolean girisYap(String kullaniciAdi, String sifre) {
-        if (this.kullaniciAdi.equals(kullaniciAdi) && this.sifre.equals(sifre)) {
-            return true;
+    public void createNewHesapForMusteri(String musteriId) {
+        for (Musteri musteri : musteriler) {
+            if (musteri.musteriId.equals(musteriId)) {
+                musteri.hesapAc();
+                break;
+            }
         }
-        return false;
+    }
+
+    public void yeniMusteriEkle() {
+        Random random = new Random();
+        String musteriId = String.valueOf(random.nextInt(1000000000));
+
+        while (true) {
+            boolean unique = true;
+            for (Bankaci bankaci : this.correspondingBankaMuduru.bankacilar) {
+                for (Musteri musteri : bankaci.musteriler) {
+                    if (musteri.musteriId.equals(musteriId)) {
+                        unique = false;
+                        break;
+                    }
+                }
+            }
+            if (unique) {
+                break;
+            }
+            musteriId = String.valueOf(random.nextInt(1000000000));
+
+        }
+    }
+
+    public void musteriSil(String musteriId) {
+        for (Musteri musteri : musteriler) {
+            if (musteri.musteriId.equals(musteriId)) {
+                musteriler.remove(musteri);
+                break;
+            }
+        }
+    }
+
+    public void musteriKullaniciAdiDegistir(String musteriId, String yeniKullaniciAdi) {
+        for (Musteri musteri : musteriler) {
+            if (musteri.musteriId.equals(musteriId)) {
+                musteri.kullaniciAdi = yeniKullaniciAdi;
+                break;
+            }
+        }
+    }
+
+    public void musteriHesabinaParaYatir(String musteriId, String uniqueHesapID, String paraMiktari) {
+        for (Musteri musteri : musteriler) {
+            if (musteri.musteriId.equals(musteriId)) {
+                for (Hesap hesap : musteri.hesaplar) {
+                    if (hesap.uniqueHesapID.equals(uniqueHesapID)) {
+                        hesap.deposit(paraMiktari);
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+    }
+
+    public void musteriHesabindanParaCek(String musteriId, String uniqueHesapID, String paraMiktari) {
+        for (Musteri musteri : musteriler) {
+            if (musteri.musteriId.equals(musteriId)) {
+                for (Hesap hesap : musteri.hesaplar) {
+                    if (hesap.uniqueHesapID.equals(uniqueHesapID)) {
+                        hesap.withdraw(paraMiktari);
+                        break;
+                    }
+                }
+                break;
+            }
+        }
     }
 
 }

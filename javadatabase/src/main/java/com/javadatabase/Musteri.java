@@ -3,7 +3,7 @@ package com.javadatabase;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Musteri {
+public class Musteri implements Kisi {
     // Kullanıcı adı ve şifre özelliklerini tanımlayın
     public String kullaniciAdi;
     public String sifre;
@@ -33,9 +33,7 @@ public class Musteri {
 
     public void setKullaniciAdi(String kullaniciAdi) {
         this.kullaniciAdi = kullaniciAdi;
-
         // Berkay: Database'de güncelle
-
     };
 
     public String getSifre() {
@@ -44,9 +42,7 @@ public class Musteri {
 
     public void setSifre(String sifre) {
         this.sifre = sifre;
-
         // Berkay: Database'de güncelle
-
     };
 
     public boolean girisYap(String sifre) {
@@ -158,6 +154,11 @@ public class Musteri {
                 break;
             }
         }
+    }
+
+    public int getKrediBasvuruDurumu(String uniqueCreditId)
+    {
+        return this.getCorrespondingBankaci().getCorrespondingBankaMuduru().getKrediBasvuruDurumu(uniqueCreditId);
     }
 
 }

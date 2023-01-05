@@ -1,3 +1,4 @@
+package com.javadatabase;;
 public class Hesap {
     // Müşteri bilgilerini tanımlayın
     private String musteriAdi;

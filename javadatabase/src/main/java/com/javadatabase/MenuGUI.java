@@ -1,3 +1,4 @@
+package com.javadatabase;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -11,6 +12,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import com.javadatabase.Bankaci;
+import com.javadatabase.Musteri;
 
 
 public class MenuGUI extends JFrame implements ActionListener {

@@ -1,10 +1,11 @@
-public class BankaMuduru {
+package com.javadatabase;
+public class Musteri {
     // Kullanıcı adı ve şifre özelliklerini tanımlayın
     private String kullaniciAdi;
     private String sifre;
 
     // Bu sınıfın nesnelerinin oluşturulması için bir yapıcı metod oluşturun
-    public BankaMuduru(String kullaniciAdi, String sifre) {
+    public Musteri(String kullaniciAdi, String sifre) {
         this.kullaniciAdi = kullaniciAdi;
         this.sifre = sifre;
     }
@@ -17,12 +18,11 @@ public class BankaMuduru {
         return false;
     }
 
-    // Banka müdürünün yetkilerini kullanabileceği diğer metodları da bu sınıf
-    // içinde oluşturabilirsiniz
-    // Örneğin, yeni bankacı ekleme metodu:
-    public void bankaciEkle(String bankaciAdi, String bankaciSifre) {
-        // Yeni bankacı nesnesi oluşturun ve veritabanına ekleyin
-        Bankaci yeniBankaci = new Bankaci(bankaciAdi, bankaciSifre);
-        // Veritabanına ekleme işlemlerini gerçekleştirin
+    // Müşterinin yetkilerini kullanabileceği diğer metodları da bu sınıf içinde
+    // oluşturabilirsiniz
+    // Örneğin, kendisine ait banka hesaplarını ve bakiye bilgilerini görüntüleme
+    // metodu:
+    public void hesapBilgileriniGoruntule() {
+        // Müşterinin hesap bilgilerini veritabanından çekin ve ekrana yazdırın
     }
 }

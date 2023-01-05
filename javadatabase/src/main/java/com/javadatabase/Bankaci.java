@@ -1,3 +1,5 @@
+package com.javadatabase;
+
 public class Bankaci {
     // Kullanıcı adı ve şifre özelliklerini tanımlayın
     private String kullaniciAdi;

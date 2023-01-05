@@ -1,4 +1,8 @@
+package com.javadatabase;
 import java.util.Scanner;
+
+import com.javadatabase.Bankaci;
+import com.javadatabase.Musteri;
 
 public class Menu {
 

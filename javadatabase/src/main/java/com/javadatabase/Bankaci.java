@@ -1,14 +1,29 @@
 package com.javadatabase;
 
+import java.util.ArrayList;
+
 public class Bankaci implements Kisi {
     // Kullanıcı adı ve şifre özelliklerini tanımlayın
-    private String kullaniciAdi;
-    private String sifre;
+    public String kullaniciAdi;
+    public String sifre;
+    public String bankaciId;
+    public String correspondingBankaMuduruId;
+    public BankaMuduru correspondingBankaMuduru;
+    public ArrayList<Musteri> musteriler = new ArrayList<Musteri>();
 
     // Bu sınıfın nesnelerinin oluşturulması için bir yapıcı metod oluşturun
-    public Bankaci(String kullaniciAdi, String sifre) {
+    public Bankaci(String kullaniciAdi, String sifre, String bankaciId, String correspondingBankaMuduruId,
+            BankaMuduru correspondingBankaMuduru, ArrayList<Musteri> musteriler, boolean create) {
         this.kullaniciAdi = kullaniciAdi;
         this.sifre = sifre;
+        this.bankaciId = bankaciId;
+        this.correspondingBankaMuduruId = correspondingBankaMuduruId;
+        this.correspondingBankaMuduru = correspondingBankaMuduru;
+        this.musteriler = musteriler;
+
+        if (create) {
+            // Berkay: Database'e kaydet
+        }
     }
 
     public String getKullaniciAdi() {
@@ -27,6 +42,10 @@ public class Bankaci implements Kisi {
         this.sifre = sifre;
     };
 
+    public BankaMuduru getCorrespondingBankaMuduru() {
+        return this.correspondingBankaMuduru;
+    };
+
     // Kullanıcı adı ve şifre doğrulaması için bir metod oluşturun
     public boolean girisYap(String sifre) {
         if (this.sifre.equals(sifre)) {
@@ -43,29 +62,4 @@ public class Bankaci implements Kisi {
         return false;
     }
 
-    public void paraYatir(long hesapNo, double miktar) {
-        // Veritabanından hesapNo ile eşleşen hesabı getirin
-        // Hesabın bakiyesini miktar kadar arttırın
-    }
-
-    public void paraCek(long hesapNo, double miktar) {
-        // Veritabanından hesapNo ile eşleşen hesabı getirin
-        // Hesabın bakiyesini miktar kadar azaltın
-    }
-
-    public void musteriBilgileriniGuncelle(long hesapNo, String musteriAdi, String musteriSoyadi, long tcKimlikNo) {
-        // Veritabanından hesapNo ile eşleşen hesabı getirin
-        // Hesabın müşteri bilgilerini güncelleyin
-    }
-
-    public void hesabiKapat(long hesapNo) {
-        // Veritabanından hesapNo ile eşleşen hesabı getirin
-        // Hesabı veritabanından silin
-    }
-
-    public void musteriEkle(String kullaniciAdi, String sifre, long tcKimlikNo) {
-        // Yeni müşteri nesnesi oluşturun ve veritabanına ekleyin
-        // Musteri yeniMusteri = new Musteri(musteriAdi, musteriSoyadi, tcKimlikNo);
-        // Veritabanına ekleme işlemlerini gerçekleştirin
-    }
 }

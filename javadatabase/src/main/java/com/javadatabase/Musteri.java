@@ -8,13 +8,18 @@ public class Musteri {
     public String kullaniciAdi;
     public String sifre;
     public String musteriId;
+    public String correspondingBankaciId;
+    public Bankaci correspondingBankaci;
     public ArrayList<Hesap> hesaplar = new ArrayList<Hesap>();
 
     // Bu sınıfın nesnelerinin oluşturulması için bir yapıcı metod oluşturun
-    public Musteri(String kullaniciAdi, String sifre, String musteriId, ArrayList<Hesap> hesaplar, boolean create) {
+    public Musteri(String kullaniciAdi, String sifre, String musteriId, String correspondingBankaciId,
+            Bankaci correspondingBankaci, ArrayList<Hesap> hesaplar, boolean create) {
         this.kullaniciAdi = kullaniciAdi;
         this.sifre = sifre;
         this.musteriId = musteriId;
+        this.correspondingBankaciId = correspondingBankaciId;
+        this.correspondingBankaci = correspondingBankaci;
         this.hesaplar = hesaplar;
 
         if (create) {
@@ -51,16 +56,29 @@ public class Musteri {
         return false;
     }
 
+    public Bankaci getCorrespondingBankaci() {
+        return this.correspondingBankaci;
+    }
+
     public void hesapAc() {
 
         Random random = new Random();
 
         String uniqueHesapId = String.valueOf(random.nextInt(1000000000));
 
-        for (Hesap hesap : this.hesaplar) {
-            while (hesap.getUniqueHesapID().equals(uniqueHesapId)) {
-                uniqueHesapId = String.valueOf(random.nextInt(1000000000));
+        while (true) {
+            boolean unique = true;
+            for (Hesap hesap : this.hesaplar) {
+                if (hesap.getUniqueHesapID().equals(uniqueHesapId)) {
+                    unique = false;
+                    break;
+                }
             }
+            if (unique) {
+                break;
+            }
+            uniqueHesapId = String.valueOf(random.nextInt(1000000000));
+
         }
 
         Hesap hesap = new Hesap(this.musteriId, uniqueHesapId);
@@ -108,7 +126,7 @@ public class Musteri {
         for (Hesap hesap : this.hesaplar) {
             boolean hesapFromExists = false;
             boolean hesapToExists = false;
-            
+
             Hesap hesapFrom = null;
             Hesap hesapTo = null;
 
@@ -132,7 +150,10 @@ public class Musteri {
     public void krediBasvuru(String uniqueHesapId, String miktar) {
         for (Hesap hesap : this.hesaplar) {
             if (hesap.getUniqueHesapID().equals(uniqueHesapId)) {
-                hesap.applyForCredit(miktar);
+
+                this.getCorrespondingBankaci().getCorrespondingBankaMuduru().yeniKrediBasvurusu(this.musteriId,
+                        hesap.getUniqueHesapID(), miktar, hesap);
+
                 // berkay: database'de güncelle
                 break;
             }

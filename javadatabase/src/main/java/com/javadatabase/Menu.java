@@ -1,4 +1,5 @@
 package com.javadatabase;
+
 import java.util.Scanner;
 
 import com.javadatabase.Bankaci;

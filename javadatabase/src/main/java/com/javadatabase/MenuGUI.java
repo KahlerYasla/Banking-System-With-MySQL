@@ -1,4 +1,5 @@
 package com.javadatabase;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -15,7 +16,6 @@ import javax.swing.JTextField;
 
 import com.javadatabase.Bankaci;
 import com.javadatabase.Musteri;
-
 
 public class MenuGUI extends JFrame implements ActionListener {
     private JTextField usernameField;

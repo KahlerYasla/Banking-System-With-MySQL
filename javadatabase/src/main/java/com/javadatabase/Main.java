@@ -1,4 +1,6 @@
-package com.javadatabase;;
+package com.javadatabase;
+
+;
 
 public class Main {
 

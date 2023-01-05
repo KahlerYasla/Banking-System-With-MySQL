@@ -1,4 +1,5 @@
 package com.javadatabase;
+
 public class Musteri {
     // Kullanıcı adı ve şifre özelliklerini tanımlayın
     private String kullaniciAdi;

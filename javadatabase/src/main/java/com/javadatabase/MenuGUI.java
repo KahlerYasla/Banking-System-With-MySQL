@@ -6,16 +6,13 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
-import com.javadatabase.Bankaci;
-import com.javadatabase.Musteri;
 
 public class MenuGUI extends JFrame implements ActionListener {
     private JTextField usernameField;
@@ -25,11 +22,8 @@ public class MenuGUI extends JFrame implements ActionListener {
     private JButton loginButton;
     private JButton exitButton;
 
-    private BankaMuduru bankaMuduru;
-    private Bankaci bankaci;
-    private Musteri musteri;
-
     public MenuGUI() {
+        // Set up the frame
         setTitle("Banka Otomasyonu");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -56,41 +50,65 @@ public class MenuGUI extends JFrame implements ActionListener {
         exitButton.addActionListener(this);
         loginPanel.add(exitButton);
 
-        // Create the background image label
-        JLabel backgroundImage = new JLabel(new ImageIcon("background.png"));
-
         // Add the login panel and background image to the frame
         add(loginPanel, BorderLayout.CENTER);
-        add(backgroundImage, BorderLayout.PAGE_START);
 
-        // Create the bank manager, banker, and customer objects
-        bankaMuduru = new BankaMuduru("admin", "admin");
-        bankaci = new Bankaci("bankaci", "bankaci");
-        musteri = new Musteri("musteri", "musteri");
+        // Show the frame
+        setVisible(true);
     }
 
-    @Override
+    private int checkLoginCredentials(String username, char[] password) {
+        int result = 0;
+        //uygulamaHesaplari tablosundan kullanici adi ve sifre kontrolu yapilacak
+        //kullanici adi bulunan satirdaki sifre ile girilen sifre karsilastirilacak
+        //eger aynıysa ve türü bankaMüdürü ise 1, bankaÇalışanı ise 2, bankaMüşterisi ise 3 döndürülecek 
+        //eger kullanici adi veya sifre yanlis ise 0 döndürülecek
+        return result=2;
+    }
+
+
     public void actionPerformed(ActionEvent e) {
+        // Check which button was clicked
         if (e.getSource() == loginButton) {
+            // Get the username and password from the text fields
             String username = usernameField.getText();
             char[] password = passwordField.getPassword();
 
-            if (username.equals("admin") && new String(password).equals("admin")) {
-                // Bank manager login
-                bankaMuduru.bankaciEkle("bankaci", "bankaci");
-            } else if (username.equals("bankaci") && new String(password).equals("bankaci")) {
-                // Banker login
-                bankaci.hesapAc("musteri", "musteri", 12345678910L);
-            } else if (username.equals("musteri") && new String(password).equals("musteri")) {
-                // Customer login
-                musteri.hesapBilgileriniGoruntule();
+            // Perform the login process here (e.g. check the username and password against
+            // a database)
+            int loginIndex = checkLoginCredentials(username, password);
+
+            if (loginIndex!=0) {
+                // If the login is successful, display the main menu
+                JOptionPane.showMessageDialog(this, "Giris basarili. Ilgili menuye yonlendiriliyorsunuz.", "Bilgi",
+                        JOptionPane.INFORMATION_MESSAGE);
+                // Close the login window
+                setVisible(false);
+                
+                switch(loginIndex){
+                    case 1:
+                        BankaMuduruMenu menuBankaci = new BankaMuduruMenu();
+                        menuBankaci.setVisible(true);
+                        break;
+                    case 2:
+                        BankaCalisanMenu menuCalisan = new BankaCalisanMenu();
+                        menuCalisan.setVisible(true);
+                        break;
+                    case 3:
+                        BankaMusteriMenu menuMusteri = new BankaMusteriMenu();
+                        menuMusteri.setVisible(true);
+                        break;
+                }
+
             } else {
-                // Invalid username or password
-                System.out.println("Kullanici adf veya şifre yanliş!");
+                // If the login is unsuccessful, display an error message
+                JOptionPane.showMessageDialog(this, "Giris basarisiz. Kullanici adi veya sifre yanlis.", "Hata",
+                        JOptionPane.ERROR_MESSAGE);
             }
         } else if (e.getSource() == exitButton) {
-            // Exit the program
+            // Exit the application
             System.exit(0);
         }
     }
+
 }

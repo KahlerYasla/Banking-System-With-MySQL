@@ -13,9 +13,30 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import com.google.protobuf.Struct;
+
+import java.sql.Statement;
+import java.util.LinkedList;
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
 
 public class MenuGUI extends JFrame implements ActionListener {
+    class nodes {
+        public String username;
+        public String password;
+        public int type;
+
+        public nodes(String username, String password, int type) {
+            this.username = username;
+            this.password = password;
+            this.type = type;
+        }
+    };
+
+    public LinkedList<nodes> app_accounts = new LinkedList<nodes>();
+
     private JTextField usernameField;
     private JPasswordField passwordField;
     private JLabel usernameLabel;
@@ -58,35 +79,74 @@ public class MenuGUI extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    private int checkLoginCredentials(String username, char[] password) {
+    private int checkLoginCredentials(String username, String password, LinkedList<nodes> app_accounts0) {
         int result = 0;
-        //uygulamaHesaplari tablosundan kullanici adi ve sifre kontrolu yapilacak
-        //kullanici adi bulunan satirdaki sifre ile girilen sifre karsilastirilacak
-        //eger aynıysa ve türü bankaMüdürü ise 1, bankaÇalışanı ise 2, bankaMüşterisi ise 3 döndürülecek 
-        //eger kullanici adi veya sifre yanlis ise 0 döndürülecek
-        return result=2;
+        // uygulamaHesaplari tablosundan kullanici adi ve sifre kontrolu yapilacak
+        // kullanici adi bulunan satirdaki sifre ile girilen sifre karsilastirilacak
+        // eger aynıysa ve türü bankaMüdürü ise 1, bankaÇalışanı ise 2, bankaMüşterisi
+        // ise 3 döndürülecek
+        // eger kullanici adi veya sifre yanlis ise 0 döndürülecek
+
+        // Check if the username and password are correct
+        for (int i = 0; i < app_accounts0.size(); i++) {
+            if (app_accounts0.get(i).username.equals(username) && app_accounts0.get(i).password.equals(password)) {
+                return app_accounts0.get(i).type;
+            }
+        }
+        return result;
+
     }
 
-
     public void actionPerformed(ActionEvent e) {
+
+        ResultSet resultSet = null;
+
+        try {
+            // Veritabanı bağlantısı için bir nesne oluşturun
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/java-project", "root", "3755");
+
+            // Sorgu için bir nesne oluşturun
+            Statement statement = conn.createStatement();
+
+            // Sorguyu çalıştırın ve sonuçları alın
+            resultSet = statement.executeQuery("SELECT * FROM app_accounts");
+
+            //result seti linked list e aktar
+            while (resultSet.next()) {
+                String username = resultSet.getString("name");
+                String password = resultSet.getString("password");
+                int type = resultSet.getInt("type");
+                app_accounts.add(new nodes(username, password, type));
+            }
+
+            // Bağlantıyı kapatın
+            conn.close();
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+
         // Check which button was clicked
         if (e.getSource() == loginButton) {
             // Get the username and password from the text fields
             String username = usernameField.getText();
             char[] password = passwordField.getPassword();
 
+            // char to string
+            String passwordString = new String(password);
+
             // Perform the login process here (e.g. check the username and password against
             // a database)
-            int loginIndex = checkLoginCredentials(username, password);
+            int loginIndex = checkLoginCredentials(username, passwordString, app_accounts);
 
-            if (loginIndex!=0) {
+            if (loginIndex != 0) {
+
                 // If the login is successful, display the main menu
                 JOptionPane.showMessageDialog(this, "Giris basarili. Ilgili menuye yonlendiriliyorsunuz.", "Bilgi",
                         JOptionPane.INFORMATION_MESSAGE);
                 // Close the login window
                 setVisible(false);
-                
-                switch(loginIndex){
+
+                switch (loginIndex) {
                     case 1:
                         BankaMuduruMenu menuBankaci = new BankaMuduruMenu();
                         menuBankaci.setVisible(true);

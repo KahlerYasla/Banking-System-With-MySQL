@@ -15,7 +15,4 @@ public interface Kisi {
     // Kullanıcı adı ve şifre doğrulaması için bir metod oluşturun
     public boolean girisYap(String sifre);
 
-    // Kullanıcı adı ve şifre doğrulaması için bir metod oluşturun
-    public void checkLoginCredentials(String userName, String sifre);
-
 }

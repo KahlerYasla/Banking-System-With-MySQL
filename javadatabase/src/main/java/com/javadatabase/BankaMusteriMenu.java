@@ -54,11 +54,17 @@ public class BankaMusteriMenu extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         // Check which button was clicked
         if (e.getSource() == viewAccountsButton) {
-            // Open the view accounts window
+            // Open the Hesaplari Görüntüle window
+            AccountOverviewWindow accountsWindow = new AccountOverviewWindow();
+            accountsWindow.setVisible(true);
         } else if (e.getSource() == transactionButton) {
-            // Open the transaction window
+            // Open the Islem Yap window
+            TransactionWindow transactionWindow = new TransactionWindow();
+            transactionWindow.setVisible(true);
         } else if (e.getSource() == krediButton) {
-            // Open the transaction window
+            // Open the Kredi sonuçlarini görüntüle window
+            CreditResultsWindow creditWindow = new CreditResultsWindow();
+            creditWindow.setVisible(true);
         } else if (e.getSource() == logoutButton) {
             // Close the main menu window
             setVisible(false);
@@ -67,4 +73,5 @@ public class BankaMusteriMenu extends JFrame implements ActionListener {
             login.setVisible(true);
         }
     }
+    
 }

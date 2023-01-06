@@ -42,7 +42,7 @@ public class BankaMuduruMenu extends JFrame implements ActionListener {
         krediOnaylaReddetButton = new JButton("Müsteri Kredisini Onayla/Reddet");
         krediOnaylaReddetButton.addActionListener(this);
         mainMenuPanel.add(krediOnaylaReddetButton);
-    
+
         logoutButton = new JButton("Çikis");
         logoutButton.addActionListener(this);
         mainMenuPanel.add(logoutButton);
@@ -57,19 +57,27 @@ public class BankaMuduruMenu extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         // Check which button was clicked
         if (e.getSource() == bankaciEkleButton) {
-//            // Open the create account window
+            // Open the bankaci ekle window
+            BankaciEkleWindow bankaciEkleWindow = new BankaciEkleWindow();
+            bankaciEkleWindow.setVisible(true);
         } else if (e.getSource() == bankaciDuzenleButton) {
-            // Open the view accounts window
+            // Open the bankaci duzenle window
+            BankaciDuzenleWindow bankaciDuzenleWindow = new BankaciDuzenleWindow();
+            bankaciDuzenleWindow.setVisible(true);
         } else if (e.getSource() == bankaciSilButton) {
-            // Open Open the view accounts window
-        } 
-            else if (e.getSource() == krediOnaylaReddetButton) {}
-        else if (e.getSource() == logoutButton) {
-            // Close the main menu window
+            // Open the bankaci sil window
+            BankaciSilWindow bankaciSilWindow = new BankaciSilWindow();
+            bankaciSilWindow.setVisible(true);
+        } else if (e.getSource() == krediOnaylaReddetButton) {
+            // Open the kredi onayla/reddet window
+            KrediOnaylaReddetWindow krediOnaylaReddetWindow = new KrediOnaylaReddetWindow();
+            krediOnaylaReddetWindow.setVisible(true);
+        } else if (e.getSource() == logoutButton) {
+            // Close the main menu and open the login window
             setVisible(false);
-            // Open the login window
             MenuGUI login = new MenuGUI();
             login.setVisible(true);
         }
     }
+
 }

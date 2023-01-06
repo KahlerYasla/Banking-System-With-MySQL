@@ -27,15 +27,19 @@ public class BankaCalisanMenu extends JFrame implements ActionListener {
         JPanel mainMenuPanel = new JPanel(new GridLayout(3, 1));
         mainMenuPanel.setBackground(Color.DARK_GRAY);
         mainMenuPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
         createAccountButton = new JButton("Müsteriye Yeni Hesap Olustur");
         createAccountButton.addActionListener(this);
         mainMenuPanel.add(createAccountButton);
+
         viewAccountsButton = new JButton("Müsteri Ekle/Sil");
         viewAccountsButton.addActionListener(this);
         mainMenuPanel.add(viewAccountsButton);
+
         transactionButton = new JButton("Müsteriye Para Yatirma/Cekme");
         transactionButton.addActionListener(this);
         mainMenuPanel.add(transactionButton);
+
         logoutButton = new JButton("Çikis");
         logoutButton.addActionListener(this);
         mainMenuPanel.add(logoutButton);
@@ -50,11 +54,17 @@ public class BankaCalisanMenu extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         // Check which button was clicked
         if (e.getSource() == createAccountButton) {
-            // Open the create account window
+            // Open the Müsteriye Yeni Hesap Olustur menu
+            MusteriyeYeniHesapOlusturWindow window = new MusteriyeYeniHesapOlusturWindow();
+            window.setVisible(true);
         } else if (e.getSource() == viewAccountsButton) {
-            // Open the view accounts window
+            // Open the Müsteri Ekle/Sils window
+            MusteriEkleSilWindow window = new MusteriEkleSilWindow();
+            window.setVisible(true);
         } else if (e.getSource() == transactionButton) {
-            // Open the transaction window
+            // Open the Müsteriye Para Yatirma/Cekme window
+            MusteriyeParaYatirmaCekmeWindow window = new MusteriyeParaYatirmaCekmeWindow();
+            window.setVisible(true);
         } else if (e.getSource() == logoutButton) {
             // Close the main menu window
             setVisible(false);

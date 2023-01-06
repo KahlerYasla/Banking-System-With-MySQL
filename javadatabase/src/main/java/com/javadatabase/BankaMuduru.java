@@ -23,8 +23,6 @@ public class BankaMuduru implements Kisi {
         
     }
 
-    public void checkLoginCredentials(String userName, String sifre){};
-
     public String getKullaniciAdi() {
         return this.kullaniciAdi;
     };

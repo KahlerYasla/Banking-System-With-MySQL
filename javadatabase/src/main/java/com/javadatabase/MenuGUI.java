@@ -14,8 +14,6 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import com.google.protobuf.Struct;
-
 import java.sql.Statement;
 import java.util.LinkedList;
 import java.sql.Connection;
